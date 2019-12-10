@@ -1,56 +1,35 @@
-import sys, re, random, time
+import sys
+import re
+import random
+import time
+import collections
+
 
 class Game:
-    def __init__(self, print_func=print,input_func=input):
+    def __init__(self, print_func=print, input_func=input):
         self._print = print_func
         self._input = input_func
+        self.score = 0
+        self.dice = [1, 2, 3, 4, 5, 6]
 
     def start(self):
         self._print('Welcome to Game of Greed')
-        main = self._input('Wanna play? Type: ')
-            if main == 'y'
-                print('Great! Check back tomorrow')
-                continue
-            else:
-                print('OK. Maybe another time')
-                break
+        main = self._input('Wanna play? Please type y to start game Type: ')
+        if main == 'y':
+            self._print('Great! Check back tomorrow')
+        else:
+            self._print('OK. Maybe another time')
 
-# start_calculate()
-
-# def start_calculate
-
-
-# class Dice:
-#     def __init__(self):
-#         self.dice_numbers = [1 : '1', 2: '2' , 3: '3', 4: '4', 5: '5', 6: '6']
-
-#     def feed(self, ingestible):
-#         if ingestible not in self.sweets:
-#             raise NotSweetError('Sweets only!')
-
-#         # do other stuff
-#         2/0 # breaking on purpose
-
-#         return True
-
-
-# class NotSweetError(ValueError):
-#     pass
-
-# if __name__ == "__main__":
-#     st = SweetTooth()
-
-#     try:
-#         st.feed('celery')
-#     except NotSweetError as nse: # good way
-#         print('I tried to feed healthy!')
-#         print(nse)
-#     except:
-#         print('uh ohs')
-
-
-
+    def calculate_score(self, ll):
+        for val in ll:
+            if val == 1:
+                self.score += 100
+            elif val == 5:
+                self.score += 50
+        return self.score
 
 
 if __name__ == "__main__":
-   pass
+    game = Game()
+    # game.start()
+    game.calculate_score([1, 2, 3, 4, 5, 6])
