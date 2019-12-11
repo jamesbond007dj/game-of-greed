@@ -20,3 +20,10 @@ def test_score_1and5_more():
     actual = score
     expected = 300
     assert actual == expected
+
+def test_score_two():
+    game = Game()
+    score = game.calculate_score([1, 2, 2, 4, 5, 5])
+    actual = score
+    expected = 300
+    assert actual == expected
