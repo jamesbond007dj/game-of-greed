@@ -26,5 +26,8 @@ The game is created with Python language. Class method is used for game built. R
 ## Change Log
 
 * 12/09/2019 16:00 - Initial setup
-* 12/09/2019 16:30 - .start() method added
+* 12/09/2019 16:30 - play() method added
 * 12/10/2019 5:00 - calculate_score function added
+* 12/11/2019 5:00 - play() method added revised
+* 12/11/2019 6:00 - play() calculate_score revised
+* 12/11/2019 6:00 - play() flow tests working
