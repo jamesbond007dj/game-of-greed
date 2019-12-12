@@ -2,26 +2,31 @@ import sys
 import re
 import random
 import time
-import collections
-import count
+from collections import Counter
 
 
 class Game:
+
+    _validation = { 'y', 'yes' , 'ok', 'yepp'}
     def __init__(self, print_func=print, input_func=input):
         self._print = print_func
         self._input = input_func
         self.score = 0
-        self.pair = 0
+        self.pairs = 0
         self.straight = 0
-        self.dice = {1:1, 2:1, 3:1, 4:1, 5:1, 6:1}
+        self.roll = {1:1, 2:1, 3:1, 4:1, 5:1, 6:1}
 
     def play(self):
         self._print('Welcome to Game of Greed')
         main = self._input('Wanna play? Please type y to start game Type: ')
-        if main == 'y':
+        if main.lower() in self._validation:
             self._print('Great! Check back tomorrow')
         else:
             self._print('OK. Maybe another time')
+
+
+    def _do_roll(self, num_roll):
+        return [random.randint(1.6) for i in range(num_roll)]
 
     roll_score_dictonary = {
     'straight': 1500,
@@ -53,15 +58,17 @@ class Game:
     }
 
 
-    def calculate_score(self):
+    def calculate_score(self, roll):
+        roll = Counter(roll)
+        _straigt = True
         for value, count in self.roll.items():
 
-            self.score += self.dice[1] * 100
-            self.score += self.dice[2] * 0
-            self.score += self.dice[3] * 0
-            self.score += self.dice[4] * 0
-            self.score += self.dice[5] * 50
-            self.score += self.dice[6] * 0
+            self.score += self.roll[1] * 100
+            self.score += self.roll[2] * 0
+            self.score += self.roll[3] * 0
+            self.score += self.roll[4] * 0
+            self.score += self.roll[5] * 50
+            self.score += self.roll[6] * 0
 
             if count != 1:
                 self.straight = False
@@ -81,79 +88,63 @@ class Game:
                 self.score += roll_score_dictonary['straight']
 
 
-            if self.dice[1] == 3:
+            if self.roll[1] == 3:
                 self.score += roll_score_dictonary['three_one']
-            elif self.dice[1] == 4:
+            elif self.roll[1] == 4:
                 self.score += roll_score_dictonary['four_one']
-            elif self.dice[1] == 5:
+            elif self.roll[1] == 5:
                 self.score += roll_score_dictonary['five_one']
-            elif self.dice[1] == 6:
+            elif self.roll[1] == 6:
                 self.score += roll_score_dictonary['six_one']
-            if self.dice[2] == 3:
+            if self.roll[2] == 3:
                 self.score += roll_score_dictonary['three_two']
-            elif self.dice[2] == 4:
+            elif self.roll[2] == 4:
                 self.score += roll_score_dictonary['four_two']
-            elif self.dice[2] == 5:
+            elif self.roll[2] == 5:
                 self.score += roll_score_dictonary['five_two']
-            elif self.dice[2] == 6:
+            elif self.roll[2] == 6:
                 self.score += roll_score_dictonary['six_two']
-            if self.dice[3] == 3:
+            if self.roll[3] == 3:
                 self.score += roll_score_dictonary['three_three']
-            elif self.dice[3] == 4:
+            elif self.roll[3] == 4:
                 self.score += roll_score_dictonary['four_three']
-            elif self.dice[3] == 5:
+            elif self.roll[3] == 5:
                 self.score += roll_score_dictonary['five_three']
-            elif self.dice[3] == 6:
+            elif self.roll[3] == 6:
                 self.score += roll_score_dictonary['six_three']
-            if self.dice[4] == 3:
+            if self.roll[4] == 3:
                 self.score += roll_score_dictonary['three_four']
-            elif self.dice[4] == 4:
+            elif self.roll[4] == 4:
                 self.score += roll_score_dictonary['four_four']
-            elif self.dice[4] == 5:
+            elif self.roll[4] == 5:
                 self.score += roll_score_dictonary['five_four']
-            elif self.dice[4] == 6:
+            elif self.roll[4] == 6:
                 self.score += roll_score_dictonary['six_four']
-            if self.dice[5] == 3:
+            if self.roll[5] == 3:
                 self.score += roll_score_dictonary['three_five']
-            elif self.dice[5] == 4:
+            elif self.roll[5] == 4:
                 self.score += roll_score_dictonary['four_five']
-            elif self.dice[5] == 5:
+            elif self.roll[5] == 5:
                 self.score += roll_score_dictonary['five_five']
-            elif self.dice[5] == 6:
+            elif self.roll[5] == 6:
                 self.score += roll_score_dictonary['six_five']
-            if self.dice[6] == 3:
+            if self.roll[6] == 3:
                 self.score += roll_score_dictonary['three_six']
-            elif self.dice[6] == 4:
+            elif self.roll[6] == 4:
                 self.score += roll_score_dictonary['four_six']
-            elif self.dice[6] == 5:
+            elif self.roll[6] == 5:
                 self.score += roll_score_dictonary['five_six']
-            elif self.dice[6] == 6:
+            elif self.roll[6] == 6:
                 self.score += roll_score_dictonary['six_six']
             else:
                 self.score += 0
         return self.score
 
-# Below is the method we did in lecture, i could not continue with it. I did more hard code as above.
-
-    # def calculate_score(self, dice):
-    #     # handle special cases of 6 dice
-    #     if len(dice)== 6:
-    #         roll_counter = Counter(dice)
-    #         # straight
-    #         if len(roll_conter) == 6
-    #             return 1500
-    #         #check for 3 pairs
-    #         vals = roll_counter.values()
-    #         val_set = set(vals)
-    #         if len(val_set) == 3
 
 
-
-    #     # {four:2,five:2,1:2} 3 pairs
-    #     return 0
 
 
 if __name__ == "__main__":
     game = Game()
-    # game.start()
-    game.calculate_score([1, 2, 3, 4, 5, 6])
+    game.play()
+    # game.calculate_score([1, 2, 3, 4, 5, 6])
