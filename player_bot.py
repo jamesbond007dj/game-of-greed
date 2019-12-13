@@ -15,7 +15,7 @@ class LazyPlayer:
         print(args[0], 'n')
         return 'n'
 
-class ParticipationTropyPlayer:
+class BondPlayer:
 
     def __init__(self):
         self.roll = None
@@ -27,15 +27,19 @@ class ParticipationTropyPlayer:
         msg =args[0]
 
         if msg.startswith('You rolled'):
-            self.roll = [int(char) fo] #resimde var
+            self.roll = [int(char) for char in msg if char.isdigit()}
         print(args[0])
 
     def _input(self, *args):
         prompt = arg[0]
 
-        if prompt == 'Wanna play? ':
+        if prompt == 'Wanna play? Please type y to start game Type: ':
             print(prompt, 'y')
         return 'y'
+
+        if prompt == 'Roll again: ':
+            print(prompt, 'n')
+        return 'n'
 
         # if prompt == 'Which would like to keep?  ':
         #     score = self.game.calculate_score(self.roll)
@@ -47,7 +51,7 @@ class ParticipationTropyPlayer:
 
 if __name__ == "__main__":
     bot = LazyPlayer()
-    bot = ParticipationTropyPlayer()
+    bot = BondPlayer()
     game = Game(bot._print, bot._input)
     bot.game = game
     game.play(1)

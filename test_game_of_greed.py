@@ -1,7 +1,7 @@
 from game_of_greed import Game
 import pytest
 
-def test_Game_one():
+def test_game_one():
     game = Game()
     assert game
 
@@ -94,6 +94,38 @@ def test_flow_no():
 #     actual = game.calculate_score(roll)
 #     assert actual == expected
 
+def test_zilch():
+    test_game = Game()
+    actual = test_game.calculate_score((6, 3, 4, 2, 6, 2))
+    assert 0 == actual
+
+
+def test_3_pairs():
+    test_game = Game()
+    actual = test_game.calculate_score((6, 4, 4, 2, 6, 2))
+    assert 1500 == actual
+
+def test_straigt():
+    test_game = Game()
+    actual = test_game.calculate_score((6, 5, 4, 1, 3, 2))
+    assert 1500 == actual
+
+def test_1_and_5():
+    test_game = Game()
+    actual = test_game.calculate_score((6, 5, 4, 1, 4, 2))
+    assert 150 == actual
+
+@pytest.mark.parametrize("roll, keepers, expected",[
+    ([1,2,3],(1,),True),
+    ([1,2,3],(1,2),True),
+    ([1,2,3],(1,2,3),True),
+    ([1,2,3],(6,),False),
+    ([1,2,3],(1,1),False),
+])
+def test_validate(game, roll, keepers, expected):
+    actual = game.validate(roll, keepers)
+    assert actual == expected
+
 class MockPlayer:
     def __init__(self, prints=[], prompts=[], responses=[], rolls=[]):
         self.prints = prints
@@ -130,3 +162,5 @@ class MockPlayer:
 @pytest.fixture()
 def game():
   return Game()
+
+
