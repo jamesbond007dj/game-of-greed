@@ -31,3 +31,6 @@ The game is created with Python language. Class method is used for game built. R
 * 12/11/2019 5:00 - play() method added revised
 * 12/11/2019 6:00 - play() calculate_score revised
 * 12/11/2019 6:00 - play() flow tests working
+* 12/12/2019 5:00 - play() calculate_score revised
+* 12/12/2019 6:00 - play() calculate_score test
+* 12/12/2019 6:00 - play() player bot created
